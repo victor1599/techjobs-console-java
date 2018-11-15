@@ -1,8 +1,8 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import com.sun.javafx.collections.MappingChange;
+
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -111,6 +111,29 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        class Comparator_1 implements Comparator<Map<String, String>>
+        {
+            public int compare(Map<String, String> first,
+                               Map<String, String> second)
+            {
+                String key = "location";
+
+                String firstValue = first.get(key);
+                String secondValue = second.get(key);
+                return firstValue.compareTo(secondValue);
+            }
+        }
+
+        Collections.sort(someJobs, new Comparator_1());
+
+        for (HashMap<String, String> job : someJobs) {
+            System.out.println("********");
+            for (Map.Entry<String, String> detail : job.entrySet()) {
+                System.out.println(detail.getKey() + ": " + detail.getValue());
+            }
+            System.out.println("********\n");
+        }
+        System.out.println("No Result");
+
     }
 }
